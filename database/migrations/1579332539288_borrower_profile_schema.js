@@ -17,8 +17,6 @@ class BorrowerProfileSchema extends Schema {
       table.boolean('hasOccupations')
       table.string('occupation')
       table.integer('collectibilityStatus')
-      table.decimal('loan_amount')
-      table.integer('loan_period')
       table.decimal('monthly_expenses')
       table.timestamps()
     })
