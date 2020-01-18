@@ -49,8 +49,8 @@ class ObjectFieldValidator {
     }
 
     static collectibilityStatus(data) {
-        this.dataTypeValidation(data, 'integer', 'collectabilityStatus')
-        this.rangeValidation(data, 1, 5, 'collectabilityStatus')
+        this.dataTypeValidation(data, 'integer', 'collectibilityStatus')
+        this.rangeValidation(data, 1, 5, 'collectibilityStatus')
         return
     }
 

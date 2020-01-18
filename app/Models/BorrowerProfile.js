@@ -18,10 +18,15 @@ class BorrowerProfile extends Model {
                 residentalStatus: 'residental_status',
                 hasOccupations: 'has_occupations',
                 occupations: 'occupations',
-                collectabilityStatus: 'collectability_status',
+                collectibilityStatus: 'collectibility_status',
                 monthlyExpense: 'monthly_expense'
             }
         })
+    }
+
+    static async getMaxMonthlyExpense() {
+        const { monthly_expense } = await BorrowerProfile.query().select('monthly_expense').orderBy('monthly_expense', 'desc').first()
+        return monthly_expense
     }
 }
 

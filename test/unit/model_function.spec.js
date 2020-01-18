@@ -15,7 +15,7 @@ test('make sure BorrowerProfile transformers work as intended', async ({ assert 
     residentalStatus: 'permanent',
     hasOccupations: true,
     occupations: 'Karyawan-permanent',
-    collectabilityStatus: 3,
+    collectibilityStatus: 3,
     monthlyExpense: 300000
   })
 
@@ -28,7 +28,7 @@ test('make sure BorrowerProfile transformers work as intended', async ({ assert 
   assert.isTrue(borrowerObj['residental_status'] == 'permanent')
   assert.isTrue(borrowerObj['has_occupations'])
   assert.isTrue(borrowerObj['occupations'] == 'Karyawan-permanent')
-  assert.isTrue(borrowerObj['collectability_status'] == 3)
+  assert.isTrue(borrowerObj['collectibility_status'] == 3)
   assert.isTrue(borrowerObj['monthly_expense'] == 300000)
 })
 
@@ -66,7 +66,7 @@ test('create borrower profile with invalid dateOfBirth, including rangeValidatio
       residentalStatus: 'permanent',
       hasOccupations: true,
       occupations: 'Karyawan',
-      collectabilityStatus: 3,
+      collectibilityStatus: 3,
       monthlyExpense: 300000
     })
   }
@@ -88,7 +88,7 @@ test('create borrower profile with invalid addresses, including lengthValidation
       residentalStatus: 'permanent',
       hasOccupations: true,
       occupations: 'Karyawan',
-      collectabilityStatus: 3,
+      collectibilityStatus: 3,
       monthlyExpense: 300000
     })
   }
@@ -110,7 +110,7 @@ test('create borrower profile with invalid residentalStatus', async ({ assert })
       residentalStatus: 'not-permanent',
       hasOccupations: true,
       occupations: 'Karyawan-permanent',
-      collectabilityStatus: 3,
+      collectibilityStatus: 3,
       monthlyExpense: 300000
     })
   }
@@ -132,7 +132,7 @@ test('create borrower profile with invalid collectabilityStatus, including dataT
       residentalStatus: 'permanent',
       hasOccupations: true,
       occupations: 'Karyawan-permanent',
-      collectabilityStatus: '3',
+      collectibilityStatus: '3',
       monthlyExpense: 300000
     })
   }
