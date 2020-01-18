@@ -14,7 +14,7 @@ class ObjectFieldValidator {
 
     static dateOfBirthValidation(data) {
         this.lengthValidation(data, 3, '/', 'dateOfBirth')
-        
+
         const dobArray = data.split('/')
         this.rangeValidation(Number(dobArray[0]), 1, 31, 'dateOfBirth')
         this.rangeValidation(Number(dobArray[1]), 1, 12, 'dateOfBirth')
@@ -61,13 +61,12 @@ class ObjectFieldValidator {
     }
 
     static loanPeriodValidation(data) {
-        this.dataTypeValidation(data, 'integer', 'loanPeriod')
+        this.dataTypeValidation(data, 'number', 'loanPeriod')
         this.rangeValidation(data, 1, 36, 'loanPeriod')
         return
     }
     
     static dataTypeValidation(data, intendedDataType, columnName) {
-        console.log(typeof data)
         if (typeof data !== intendedDataType) 
             throw new InvalidObjectFieldException(invalidDataTypeMessage + columnName, columnName, 400)
         return
