@@ -22,6 +22,56 @@ class ScoringCalculation {
         const criterionValue = value * criterion[criterionName]
         return criterionValue
     }
+
+    static calculateLoanStatus(loanAmount, loanPeriod, score) {
+        const criterions = [
+            {
+                amountRange: [1000000, 2500000],
+                duration: '<=12',
+                minimumScore: 0.4
+            },
+            {
+                amountRange: [1000000, 2500000],
+                duration: '>12',
+                minimumScore: 0.5
+            },
+            {
+                amountRange: [2500001, 5000000],
+                duration: '<=12',
+                minimumScore: 0.6
+            },
+            {
+                amountRange: [2500001, 5000000],
+                duration: '>12',
+                minimumScore: 0.7
+            },
+            {
+                amountRange: [5000001, 10000000],
+                duration: '<=12',
+                minimumScore: 0.8
+            },
+            {
+                amountRange: [5000001, 10000000],
+                duration: '>12',
+                minimumScore: 0.9
+            }
+        ]
+        
+        for (const criterion of criterions) {
+            if (loanAmount > criterion.amountRange[0] && loanAmount < criterion.amountRange[1]) {
+                const duration = criterion.duration.includes('<=')
+                if (duration) {
+                    if (loanPeriod <= 12 && score > criterion.minimumScore) 
+                        return 'approved'
+                }
+                else {
+                    if (loanPeriod > 12 && score > criterion.minimumScore)
+                        return 'approved'
+                }
+            }
+        }
+        return 'rejected'
+    }
 }
 
 module.exports = ScoringCalculation

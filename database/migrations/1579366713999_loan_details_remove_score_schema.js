@@ -12,7 +12,7 @@ class LoanDetailsRemoveScoreSchema extends Schema {
   }
 
   down () {
-    this.table('loan_details_remove_scores', (table) => {
+    this.table('loan_details', (table) => {
       // reverse alternations
       table.decimal('loan_score')
     })

@@ -8,7 +8,7 @@ class LoanDetailSchema extends Schema {
     this.create('loan_details', (table) => {
       table.increments()
       table.integer('borrower_profile_id').unsigned().references('id').inTable('borrower_profiles').onDelete('cascade').index()
-      table.decimal('loan_amount')
+      table.decimal('loan_amount', null)
       table.integer('loan_period')
       table.decimal('loan_score')
       table.string('loan_status')

@@ -2,6 +2,7 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
+const Event = use('Event')
 const ScoringCalculation = use('App/Utils/ScoringCalculation')
 
 class BorrowerProfile extends Model {
@@ -22,6 +23,10 @@ class BorrowerProfile extends Model {
                 monthlyExpense: 'monthly_expense'
             }
         })
+    }
+
+    loans() {
+        return this.hasMany('App/Models/LoanDetail')
     }
 
     static async getMinCollectibilityStatus() {
@@ -83,6 +88,7 @@ class BorrowerProfile extends Model {
 
         this.profile_score = overallScore
         await this.save()
+        Event.fire('update::borrowerScoring', this)
         return
     }
 }

@@ -12,7 +12,7 @@ class BorrowerProfilesAddScoreSchema extends Schema {
   }
 
   down () {
-    this.table('borrower_profiles_add_scores', (table) => {
+    this.table('borrower_profiles', (table) => {
       // reverse alternations
       table.dropColumn('profile_score')
     })

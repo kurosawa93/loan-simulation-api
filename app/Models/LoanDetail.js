@@ -2,6 +2,7 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
+const ScoringCalculation = use('App/Utils/ScoringCalculation')
 
 class LoanDetail extends Model {
     static boot() {
@@ -12,6 +13,15 @@ class LoanDetail extends Model {
                 loanAmount: 'loan_amount'
             }
         })
+    }
+
+    async calculateLoanStatus(profileScore) {
+        this.loan_status = ScoringCalculation.calculateLoanStatus(this.loan_amount, this.loan_period, profileScore)
+        await this.save()
+    }
+
+    borrower() {
+        return this.belongsTo('App/Models/BorrowerProfile')
     }
 }
 
