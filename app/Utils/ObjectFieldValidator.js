@@ -49,19 +49,16 @@ class ObjectFieldValidator {
     }
 
     static collectibilityStatus(data) {
-        this.dataTypeValidation(data, 'integer', 'collectibilityStatus')
         this.rangeValidation(data, 1, 5, 'collectibilityStatus')
         return
     }
 
     static monthlyExpenseValidation(data) {
-        this.dataTypeValidation(data, 'number', 'monthlyExpense')
         this.rangeValidation(data, 0, 3000000, 'monthlyExpense')
         return
     }
 
     static loanPeriodValidation(data) {
-        this.dataTypeValidation(data, 'number', 'loanPeriod')
         this.rangeValidation(data, 1, 36, 'loanPeriod')
         return
     }
