@@ -54,13 +54,48 @@ class BorrowerProfile extends Model {
     }
 
     static async getBorrowerData(loanStatus = null) {
-        const result = await BorrowerProfile.query().with('loans').whereHas('loans', (builder) => {
+        const result = []
+        const queryResult = await BorrowerProfile.query().with('loans').whereHas('loans', (builder) => {
             if (!loanStatus)
                 builder.where('loan_status', 'pending')
             else
                 builder.where('loan_status', loanStatus)
         }).fetch()
+
+        if (queryResult.rows.length > 0) {
+            for (const data of queryResult.rows) {
+                result.push(this.transformObjectToJson(data.toJSON()))
+            }
+        }
         return result
+    }
+
+    static transformObjectToJson(data) {
+        const columns = {
+            full_name: 'fullName',
+            gender: 'gender',
+            date_of_birth: 'dateOfBirth',
+            addresses: 'addresses',
+            identity_card: 'identityCard',
+            npwp: 'npwp',
+            residental_status: 'residentalStatus',
+            has_occupations: 'hasOccupations',
+            occupations: 'occupations',
+            collectibility_status: 'collectibilityStatus',
+            monthly_expense: 'monthlyExpense'
+        }
+
+        const jsonObj = {}
+        for (const key in columns) {
+            jsonObj[columns[key]] = data[key]
+        }
+
+        if (data.loans != null && data.loans.length > 0) {
+            const loan = data.loans[0]
+            jsonObj['loanAmount'] = loan['loan_amount']
+            jsonObj['loanPeriod'] = loan['loan_period']
+        }
+        return jsonObj
     }
 
     async calculateCollectabilityCriterion() {
