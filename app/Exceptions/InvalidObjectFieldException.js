@@ -3,10 +3,18 @@
 const { LogicalException } = require('@adonisjs/generic-exceptions')
 
 class InvalidObjectFieldException extends LogicalException {
-  /**
-   * Handle this exception by itself
-   */
-  // handle () {}
+  constructor(message, status, code) {
+    super(message, status, code)
+  }
+
+  handle(error, { response }) {
+    return response.status(error.code).send({
+        data: null,
+        meta: {
+            message: error.message
+        }
+    })
+  }
 }
 
 module.exports = InvalidObjectFieldException

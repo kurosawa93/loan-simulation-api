@@ -10,7 +10,7 @@ class CommonBaseModel {
     Model.transformJsonToObject = function (jsonData) {
       const object = new Model()
       const columns = options.columns
-      for (const key in jsonData) {
+      for (const key in columns) {
           const functionName = key + 'Validation'
           if (typeof ObjectFieldValidator[functionName] === 'function') ObjectFieldValidator[functionName](jsonData[key])
           object[columns[key]] = jsonData[key]
