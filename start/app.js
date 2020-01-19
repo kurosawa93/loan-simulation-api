@@ -13,7 +13,8 @@
 const providers = [
   '@adonisjs/framework/providers/AppProvider',
   '@adonisjs/lucid/providers/LucidProvider',
-  '@adonisjs/bodyparser/providers/BodyParserProvider'
+  '@adonisjs/bodyparser/providers/BodyParserProvider',
+  '@adonisjs/cors/providers/CorsProvider'
 ]
 
 /*
