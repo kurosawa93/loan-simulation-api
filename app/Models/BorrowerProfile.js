@@ -53,6 +53,16 @@ class BorrowerProfile extends Model {
         return 1
     }
 
+    static async getBorrowerData(loanStatus = null) {
+        const result = await BorrowerProfile.query().with('loans').whereHas('loans', (builder) => {
+            if (!loanStatus)
+                builder.where('loan_status', 'pending')
+            else
+                builder.where('loan_status', loanStatus)
+        }).fetch()
+        return result
+    }
+
     async calculateCollectabilityCriterion() {
         const minCollectibility = await BorrowerProfile.getMinCollectibilityStatus()
         const normalCollectibility = ScoringCalculation.calculateNormalMinValue(this.collectibility_status, minCollectibility)
