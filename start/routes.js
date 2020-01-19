@@ -18,5 +18,6 @@ const Route = use('Route')
 
 Route.group(() => {
   Route.get('/data', 'DatumController.getData')
+  Route.post('/data/:id', 'DatumController.evaluateData')
   Route.post('/upload', 'FileController.uploadCsv')
 }).prefix('api')

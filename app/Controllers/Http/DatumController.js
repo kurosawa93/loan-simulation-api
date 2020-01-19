@@ -28,6 +28,33 @@ class DatumController {
             })
         }
     }
+
+    async evaluateData({params, response}) {
+        try {
+            const borrower = await BorrowerProfile.findOrFail(params.id)
+            await borrower.evaluateProfile()
+            response.status(200).send({
+                data: borrower,
+                meta: {
+                    message: 'OK'
+                }
+            })
+        }
+        catch(err) {
+            if (err.code === 400)
+                response.status(err.code).send({
+                    meta: {
+                        message: err.message
+                    }
+                })
+
+            response.status(500).send({
+                meta: {
+                    message: err.message
+                }
+            })
+        }
+    }
 }
 
 module.exports = DatumController
