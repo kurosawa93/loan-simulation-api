@@ -85,7 +85,9 @@ class BorrowerProfile extends Model {
             monthly_expense: 'monthlyExpense'
         }
 
-        const jsonObj = {}
+        const jsonObj = {
+            id: data['id']
+        }
         for (const key in columns) {
             jsonObj[columns[key]] = data[key]
         }
